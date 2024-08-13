@@ -28,7 +28,7 @@ model Org {
 
 enum Age {
   PUPPY
-  Adult
+  ADULT
 }
 
 enum Size {
@@ -55,14 +55,6 @@ enum EnvironmentNeededSizes {
   LARGE
 }
 
-model AdoptionRequirements {
-  id                  String    @id @default(uuid())
-  requirement         String
-
-  pet                 Pet       @relation(fields: [pet_id], references: [id])
-  pet_id String
-}
-
 model Pet {
   id                  String    @id @default(uuid())
   age                 Age
@@ -74,7 +66,7 @@ model Pet {
   environment_needed  EnvironmentNeededSizes
   created_at          DateTime  @default(now())
 
-  requirements        AdoptionRequirements[]
+  requirements        String[]
 
   org                 Org @relation(fields: [org_id], references: [id])
   org_id              String
