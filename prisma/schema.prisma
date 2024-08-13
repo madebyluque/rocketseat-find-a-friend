@@ -71,12 +71,22 @@ model Pet {
   name                String
   about               String
   environment_needed  EnvironmentNeededSizes
-  city                String
 
   requirements        AdoptionRequirements[]
 
   org                 Org @relation(fields: [org_id], references: [id])
   org_id              String
+  
+  city                City @relation(fields: [city_id], references: [id])
+  city_id             String
 
   @@map("pets")
+}
+
+model City {
+  id                  String  @id @default(uuid())
+  name                String
+  state               String
+
+  pets                Pet[]
 }
