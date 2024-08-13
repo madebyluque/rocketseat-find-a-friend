@@ -1,5 +1,5 @@
 import { Prisma, Pet } from '@prisma/client'
-import { PetsRepository } from '../pets-repository'
+import { FetchPetsParams, PetsRepository } from '../pets-repository'
 import { randomUUID } from 'crypto'
 
 export class InMemoryPetsRepository implements PetsRepository {
@@ -24,5 +24,44 @@ export class InMemoryPetsRepository implements PetsRepository {
     this.items.push(pet)
 
     return pet
+  }
+
+  async getById(id: string): Promise<Pet | null> {
+    const pet = this.items.find((item) => item.id === id)
+
+    if (!pet) {
+      return null
+    }
+
+    return pet
+  }
+
+  async fetchPets({
+    city_id,
+    page,
+    age,
+    energy_level,
+    size,
+    independency_level,
+  }: FetchPetsParams): Promise<Pet[]> {
+    let pets = this.items.filter((item) => item.city_id === city_id)
+
+    if (age !== null && age !== undefined) {
+      pets = pets.filter((pet) => pet.age === age)
+    }
+
+    if (size !== null && size !== undefined) {
+      pets = pets.filter((pet) => pet.size === size)
+    }
+
+    if (energy_level !== null && energy_level !== undefined) {
+      pets = pets.filter((pet) => pet.energy_level === energy_level)
+    }
+
+    if (independency_level !== null && independency_level !== undefined) {
+      pets = pets.filter((pet) => pet.independency_level === independency_level)
+    }
+
+    return pets.slice((page - 1) * 20, page * 20)
   }
 }
