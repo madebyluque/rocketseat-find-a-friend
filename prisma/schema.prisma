@@ -20,6 +20,7 @@ model Org {
   whatsapp            String    @unique
   password_hash       String
   role                Role      @default(ORG)
+  created_at          DateTime  @default(now())
 
   @@map("orgs")
   pets                Pet[]
@@ -71,6 +72,7 @@ model Pet {
   name                String
   about               String
   environment_needed  EnvironmentNeededSizes
+  created_at          DateTime  @default(now())
 
   requirements        AdoptionRequirements[]
 
@@ -87,6 +89,7 @@ model City {
   id                  String  @id @default(uuid())
   name                String
   state               String
+  created_at          DateTime  @default(now())
 
   pets                Pet[]
 }
