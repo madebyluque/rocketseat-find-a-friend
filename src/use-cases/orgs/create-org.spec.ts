@@ -6,7 +6,7 @@ import { OrgAlreadyExistsError } from '../errors/org-already-exists-error'
 let orgsRepository: InMemoryOrgsRepository
 let sut: CreateOrgUseCase
 
-describe('CreatePet use case', () => {
+describe('CreateOrg use case', () => {
   beforeEach(() => {
     orgsRepository = new InMemoryOrgsRepository()
     sut = new CreateOrgUseCase(orgsRepository)
