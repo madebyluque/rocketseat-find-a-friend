@@ -17,10 +17,7 @@ export async function fetch(request: FastifyRequest, reply: FastifyReply) {
     independency_level: z.nativeEnum(IndependencyLevels).optional(),
     environment_needed: z.nativeEnum(EnvironmentNeededSizes).optional(),
     page: z.coerce.number().default(1),
-  })
-
-  const fetchPetParamsSchema = z.object({
-    cityId: z.string(),
+    city_id: z.string(),
   })
 
   const {
@@ -30,9 +27,8 @@ export async function fetch(request: FastifyRequest, reply: FastifyReply) {
     independency_level,
     environment_needed,
     page,
+    city_id,
   } = fetchPetQuerySchema.parse(request.query)
-
-  const { cityId } = fetchPetParamsSchema.parse(request.params)
 
   const useCase = makeFetchPetsUseCase()
 
@@ -43,7 +39,7 @@ export async function fetch(request: FastifyRequest, reply: FastifyReply) {
     size,
     independency_level,
     environment_needed,
-    city_id: cityId,
+    city_id,
   })
 
   return reply.status(200).send({

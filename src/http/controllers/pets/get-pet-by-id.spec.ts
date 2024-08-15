@@ -10,7 +10,7 @@ import {
 } from '@prisma/client'
 import { prisma } from '@/lib/prisma'
 
-describe('Fetch Pets (e2e)', () => {
+describe('Get Pet By Id (e2e)', () => {
   beforeAll(async () => {
     await app.ready()
   })
@@ -19,7 +19,7 @@ describe('Fetch Pets (e2e)', () => {
     await app.close()
   })
 
-  it('should be able to fetch pets by city', async () => {
+  it('should be able to get pet by id', async () => {
     await prisma.city.create({
       data: {
         id: 'sp',
@@ -54,34 +54,14 @@ describe('Fetch Pets (e2e)', () => {
       },
     })
 
-    const anotherPet = await prisma.pet.create({
-      data: {
-        age: Age.ADULT,
-        energy_level: EnergyLevels.HIGH,
-        size: Size.LARGE,
-        independency_level: IndependencyLevels.HIGH,
-        name: `Thor 2`,
-        about: 'God of dogs',
-        environment_needed: EnvironmentNeededSizes.LARGE,
-        city_id: 'sp',
-        org_id: org.id,
-      },
-    })
-
-    const response = await request(app.server).get('/pets?city_id=sp').send()
+    const response = await request(app.server).get(`/pets/${pet.id}`).send()
 
     expect(response.statusCode).toEqual(200)
     expect(response.body).toEqual({
-      pets: [
-        expect.objectContaining({
-          name: pet.name,
-          id: pet.id,
-        }),
-        expect.objectContaining({
-          name: anotherPet.name,
-          id: anotherPet.id,
-        }),
-      ],
+      pet: expect.objectContaining({
+        name: pet.name,
+        id: pet.id,
+      }),
     })
   })
 })

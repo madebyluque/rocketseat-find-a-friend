@@ -73,6 +73,9 @@ export class PrismaPetsRepository implements PetsRepository {
       where: filters,
       skip: (page - 1) * 20,
       take: 20,
+      orderBy: {
+        name: 'asc',
+      },
     })
 
     return pets
