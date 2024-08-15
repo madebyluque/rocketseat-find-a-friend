@@ -5,6 +5,7 @@ import {
   Size,
   EnergyLevels,
   IndependencyLevels,
+  EnvironmentNeededSizes,
 } from '@prisma/client'
 import { FetchPetsParams, PetsRepository } from '../pets-repository'
 import { prisma } from '@/lib/prisma'
@@ -15,6 +16,7 @@ interface PetsFilter {
   size?: Size
   energy_level?: EnergyLevels
   independency_level?: IndependencyLevels
+  environment_needed?: EnvironmentNeededSizes
 }
 
 export class PrismaPetsRepository implements PetsRepository {
@@ -41,6 +43,7 @@ export class PrismaPetsRepository implements PetsRepository {
     energy_level,
     size,
     independency_level,
+    environment_needed,
   }: FetchPetsParams): Promise<Pet[]> {
     const filters: PetsFilter = {
       city_id,
@@ -60,6 +63,10 @@ export class PrismaPetsRepository implements PetsRepository {
 
     if (independency_level !== null && independency_level !== undefined) {
       filters.independency_level = independency_level
+    }
+
+    if (environment_needed !== null && environment_needed !== undefined) {
+      filters.environment_needed = environment_needed
     }
 
     const pets = await prisma.pet.findMany({

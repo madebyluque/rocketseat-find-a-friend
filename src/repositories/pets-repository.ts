@@ -1,6 +1,7 @@
 import {
   Age,
   EnergyLevels,
+  EnvironmentNeededSizes,
   IndependencyLevels,
   Pet,
   Prisma,
@@ -14,6 +15,7 @@ export interface FetchPetsParams {
   energy_level?: EnergyLevels
   size?: Size
   independency_level?: IndependencyLevels
+  environment_needed?: EnvironmentNeededSizes
 }
 
 export interface PetsRepository {

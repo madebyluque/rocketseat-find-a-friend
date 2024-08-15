@@ -43,6 +43,7 @@ export class InMemoryPetsRepository implements PetsRepository {
     energy_level,
     size,
     independency_level,
+    environment_needed,
   }: FetchPetsParams): Promise<Pet[]> {
     let pets = this.items.filter((item) => item.city_id === city_id)
 
@@ -60,6 +61,10 @@ export class InMemoryPetsRepository implements PetsRepository {
 
     if (independency_level !== null && independency_level !== undefined) {
       pets = pets.filter((pet) => pet.independency_level === independency_level)
+    }
+
+    if (environment_needed !== null && environment_needed !== undefined) {
+      pets = pets.filter((pet) => pet.environment_needed === environment_needed)
     }
 
     return pets.slice((page - 1) * 20, page * 20)

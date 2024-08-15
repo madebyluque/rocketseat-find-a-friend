@@ -2,6 +2,7 @@ import { PetsRepository } from '@/repositories/pets-repository'
 import {
   Age,
   EnergyLevels,
+  EnvironmentNeededSizes,
   IndependencyLevels,
   Pet,
   Size,
@@ -14,6 +15,7 @@ interface FetchPetsUseCaseRequest {
   energy_level?: EnergyLevels
   size?: Size
   independency_level?: IndependencyLevels
+  environment_needed?: EnvironmentNeededSizes
 }
 
 interface FetchPetsUseCaseResponse {
@@ -30,6 +32,7 @@ export class FetchPetsUseCase {
     energy_level,
     size,
     independency_level,
+    environment_needed,
   }: FetchPetsUseCaseRequest): Promise<FetchPetsUseCaseResponse> {
     const pets = await this.petsRepository.fetchPets({
       city_id,
@@ -38,6 +41,7 @@ export class FetchPetsUseCase {
       energy_level,
       size,
       independency_level,
+      environment_needed,
     })
 
     return {
