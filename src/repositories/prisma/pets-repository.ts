@@ -19,9 +19,11 @@ interface PetsFilter {
 
 export class PrismaPetsRepository implements PetsRepository {
   async create(data: Prisma.PetUncheckedCreateInput): Promise<Pet> {
-    return await prisma.pet.create({
+    const pet = await prisma.pet.create({
       data,
     })
+
+    return pet
   }
 
   async getById(id: string): Promise<Pet | null> {
