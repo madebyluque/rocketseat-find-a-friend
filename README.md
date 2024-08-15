@@ -18,4 +18,4 @@ O desafio pode ser encontrado [aqui](https://efficient-sloth-d85.notion.site/Des
 - [x] Um pet deve estar ligado a uma ORG
 - [x] O usuário que quer adotar, entrará em contato com a ORG via WhatsApp
 - [x] Todos os filtros, além da cidade, são opcionais
-- [ ] Para uma ORG acessar a aplicação como admin, ela precisa estar logada
+- [x] Para uma ORG acessar a aplicação como admin, ela precisa estar logada

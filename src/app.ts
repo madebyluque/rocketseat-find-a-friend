@@ -8,12 +8,6 @@ import fastifyCookie from '@fastify/cookie'
 
 export const app = fastify()
 
-app.get('/hello', (_, reply) => {
-  return reply.status(200).send({
-    message: 'Hello!',
-  })
-})
-
 app.register(fastifyJwt, {
   secret: env.JWT_SECRET,
   cookie: {
